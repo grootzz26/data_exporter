@@ -31,48 +31,6 @@ def exported_files_logs(source, excel_file_media_path):
 def write_list_of_dict_to_excel(
     data_list: List[dict], source=None
 ):
-    """
-    For the given data, generates an excel file. First writes a CSV file and then converts to XLSX.
-    Based on the `is_temporary_file` param, the place of file creation varies. The output of this function is
-    a public file url to the created file.
-
-    Use Cases:
-        1. Used in bulk upload output data files
-        2. Bulk export from the frontend
-
-    Note:
-        1. This is used to write an excel file based on the given data.
-        2. Multiple sheets can also be written using this function.
-        3. This first writes the csv files and then converts the csv files to an excel file.
-
-    Input Data Schema:
-        [                                           ==> Excel file
-            [                                       ==> Excel Sheet
-                {                                   ==> Excel Sheet Row
-                    "column_name_1": "value1",      ==> Row Column Data | Headers are got dynamically
-                    "column_name_2": "value2",
-                },
-                ...
-            ],
-            ...
-        ]
-
-    Example Data Input:
-        [
-            [                                       ==> Sheet 1
-                {"name":"Ajai Danial", "age": 12},      ==> Row 1
-                {"name":"Danial", "age": 20},           ==> Row 2
-            ],
-            [                                       ==> Sheet 2
-                {"name":"Ajai Danial", "age": 12},      ==> Row 1
-                {"name":"Danial", "age": 20},           ==> Row 2
-            ]
-        ]
-    """
-
-    # decides where to create the file based on the `is_temporary_file`
-    # if temporary, then the files are removed using a celery beat task
-    # temporary files are generated for single time use and are not required after some time
     root_directory = settings.STORE_ROOT
 
     # config for the file
